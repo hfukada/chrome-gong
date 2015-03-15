@@ -1,19 +1,13 @@
 var irc = require('irc');
 var fs = require('fs');
 
-irc_host = 'fl.irc.slack.com';
-irc_username = 'besos';
-irc_password = 'password';
+conf = JSON.parse(fs.readFileSync('./config.json'));
 
-fs.readFile("sound64", function(error, data) {
-  console.log(data);
-  document.write('<audio id="player" src="'+ data + '" >');
-  document.getElementById('player').play();
-});
 
-var client = new irc.Client(irc_host, 'besos', {
-      userName: irc_username,
-      password: irc_password,
+
+var client = new irc.Client(conf['host'], 'besos', {
+      userName: conf['username'],
+      password: conf['password'],
       sasl: true,
       port: 6697,
       secure: true,
